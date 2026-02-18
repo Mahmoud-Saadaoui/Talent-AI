@@ -1,0 +1,14 @@
+{
+  "common": {
+    "welcome": "Bienvenue dans TalentIA",
+    "appName": "TalentIA",
+    "loading": "Chargement...",
+    "error": "Erreur"
+  },
+  "language": {
+    "select": "Choisir la langue",
+    "arabic": "العربية",
+    "french": "Français",
+    "english": "English"
+  }
+}

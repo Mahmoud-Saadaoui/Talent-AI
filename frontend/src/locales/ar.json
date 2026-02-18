@@ -1,0 +1,14 @@
+{
+  "common": {
+    "welcome": "السلام عليكم ورحمة الله وبركاته",
+    "appName": "TalentIA",
+    "loading": "جاري التحميل...",
+    "error": "خطأ"
+  },
+  "language": {
+    "select": "اختر اللغة",
+    "arabic": "العربية",
+    "french": "Français",
+    "english": "English"
+  }
+}
