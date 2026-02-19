@@ -29,7 +29,7 @@ app.use(limiter);
 
 // Routes
 app.use('/api/v1/health', healthRoutes);
-// app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/auth', authRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

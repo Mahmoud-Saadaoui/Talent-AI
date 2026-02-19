@@ -47,17 +47,17 @@ const ThemeSwitcher = () => {
         ref={btnRef}
         onClick={() => setOpen(prev => !prev)}
         aria-label="Select theme"
-        className="flex items-center justify-center w-10 h-10 transition-all duration-200 shadow-sm"
+        className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
-        {currentIcon}
+        <span className="text-xl">{currentIcon}</span>
       </button>
 
       {/* Dropdown */}
       {open && (
         <div
           ref={dropdownRef}
-          className={`absolute mt-2 w-36 rounded-xl shadow-lg z-50
-          ${isRTL ? "left-0" : "right-0"}`}
+          className={`absolute mt-2 w-32 rounded-lg shadow-lg z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
+          ${isRTL ? "right-0" : "left-0"}`}
         >
           {Object.entries(themes).map(([key, { label, icon }]) => (
             <button
@@ -66,10 +66,14 @@ const ThemeSwitcher = () => {
                 setTheme(key as ThemeMode);
                 setOpen(false);
               }}
-              className={`w-full flex items-center gap-2 px-4 py-2 transition-all
-                ${theme === key ? "font-semibold" : ""}`}
+              className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg
+                ${theme === key
+                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                }`}
             >
-              {icon} {label}
+              <span className="text-base">{icon}</span>
+              <span>{label}</span>
             </button>
           ))}
         </div>

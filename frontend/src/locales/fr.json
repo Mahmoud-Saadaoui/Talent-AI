@@ -10,5 +10,249 @@
     "arabic": "العربية",
     "french": "Français",
     "english": "English"
+  },
+  "home": {
+    "description": "Plateforme intelligente d'offres d'emploi qui connecte les talents aux meilleures opportunités.",
+    "getStarted": "Commencer",
+    "hero": {
+      "badge": "Propulsé par l'IA",
+      "title": "Trouvez le Talent",
+      "titleHighlight": "Idéal avec l'IA",
+      "subtitle": "La plateforme de recrutement intelligente qui connecte les meilleurs talents aux opportunités parfaites grâce à l'intelligence artificielle.",
+      "signIn": "Se connecter"
+    },
+    "search": {
+      "jobButton": "Rechercher un job",
+      "talentButton": "Trouver un talent",
+      "jobPlaceholder": "Titre du poste, compétence, entreprise...",
+      "talentPlaceholder": "Compétence, titre du poste, domaine...",
+      "searchButton": "Rechercher",
+      "quickFilters": ["Développeur", "Designer", "Marketing", "Data", "Remote"]
+    },
+    "profile": {
+      "title": "Quel est votre profil ?",
+      "subtitle": "Choisissez votre parcours pour découvrir toutes les fonctionnalités adaptées à vos besoins.",
+      "getStarted": "Commencer",
+      "candidate": {
+        "title": "Je suis Candidat",
+        "description": "Trouvez l'emploi de vos rêves et boostez votre candidature avec nos outils IA.",
+        "benefits": [
+          "Recherche intelligente d'offres",
+          "Analyse et optimisation de CV",
+          "Recommandations personnalisées",
+          "Alertes jobs en temps réel"
+        ]
+      },
+      "recruiter": {
+        "title": "Je suis Recruteur",
+        "description": "Identifiez les meilleurs talents et optimisez votre processus de recrutement.",
+        "benefits": [
+          "Matching IA intelligent",
+          "Analyse automatique des CV",
+          "Tableau de bord analytics",
+          "Système de gestion des candidats"
+        ]
+      }
+    },
+    "features": {
+      "title": "Fonctionnalités puissantes",
+      "subtitle": "Découvrez comment notre IA transforme l'expérience de recrutement pour les candidats et les recruteurs.",
+      "matching": {
+        "title": "Matching IA Intelligent",
+        "description": "Notre algorithme analyse compétences, expérience et personnalité pour trouver les meilleures correspondances."
+      },
+      "cvAnalysis": {
+        "title": "Analyse Automatique de CV",
+        "description": "Extraction instantanée des informations clés et évaluation objective de chaque candidature."
+      },
+      "recommendations": {
+        "title": "Recommandations Personnalisées",
+        "description": "Suggestions d'offres ou de profils adaptées à vos critères et préférences uniques."
+      },
+      "analytics": {
+        "title": "Dashboard Analytics",
+        "description": "Statistiques détaillées et insights pour optimiser votre stratégie de recrutement."
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche ?",
+      "subtitle": "Trois étapes simples pour trouver l'opportunité ou le talent idéal.",
+      "step1": {
+        "title": "Upload CV / Job",
+        "description": "Téléchargez votre CV ou décrivez le poste à pourvoir en quelques secondes."
+      },
+      "step2": {
+        "title": "Analyse IA",
+        "description": "Notre IA analyse et comprend les besoins, compétences et exigences spécifiques."
+      },
+      "step3": {
+        "title": "Matching & Résultats",
+        "description": "Recevez les meilleures correspondances avec des scores de compatibilité détaillés."
+      }
+    },
+    "stats": {
+      "candidates": "Candidats actifs",
+      "companies": "Entreprises",
+      "satisfaction": "Taux de satisfaction",
+      "avgTime": "Temps de matching moyen"
+    },
+    "testimonials": {
+      "title": "Ce que disent nos utilisateurs",
+      "subtitle": "Des milliers de candidats et recruteurs nous font confiance.",
+      "item1": {
+        "quote": "Grâce à TalentIA, j'ai trouvé le poste parfait en seulement 2 semaines. Les recommandations étaient très pertinentes !",
+        "author": "Sophie Martin",
+        "role": "Développeuse Full-stack"
+      },
+      "item2": {
+        "quote": "Le système de matching IA nous a fait gagner 50% de temps dans notre processus de recrutement. Vraiment impressionnant.",
+        "author": "Thomas Dubois",
+        "role": "HR Manager, TechCorp"
+      },
+      "item3": {
+        "quote": "L'analyse de CV m'a aidé à comprendre mes points forts et à améliorer ma candidature. Je suis embauchée !",
+        "author": "Léa Bernard",
+        "role": "UX Designer"
+      }
+    },
+    "companies": {
+      "label": "Ils nous font confiance",
+      "list": ["Google", "Microsoft", "Amazon", "Apple", "Meta"]
+    },
+    "cta": {
+      "title": "Prêt à transformer votre recrutement ?",
+      "subtitle": "Rejoignez des milliers de candidats et recruteurs qui utilisent déjà TalentIA.",
+      "primaryButton": "Commencer gratuitement",
+      "secondaryButton": "Voir une démo"
+    },
+    "footer": {
+      "description": "La plateforme de recrutement intelligente qui connecte les talents aux meilleures opportunités.",
+      "forCandidates": "Candidats",
+      "forRecruiters": "Recruteurs",
+      "company": "Entreprise",
+      "allRightsReserved": "Tous droits réservés.",
+      "location": "Paris, France",
+      "links": {
+        "searchJobs": "Rechercher des offres",
+        "cvBuilder": "Créateur de CV",
+        "recommendations": "Recommandations",
+        "careerAdvice": "Conseils carrière",
+        "postJob": "Publier une offre",
+        "searchTalents": "Chercher des talents",
+        "pricing": "Tarifs",
+        "enterprise": "Entreprise",
+        "about": "À propos",
+        "contact": "Contact",
+        "privacy": "Confidentialité",
+        "terms": "Conditions d'utilisation"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil",
+    "goBack": "Retour en arrière",
+    "helpfulLinks": "Liens utiles",
+    "links": {
+      "home": "Accueil",
+      "login": "Connexion",
+      "register": "Inscription"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Connectez-vous à votre compte TalentIA",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "registerLink": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez TalentIA dès aujourd'hui",
+      "name": "Nom complet",
+      "namePlaceholder": "Entrez votre nom complet",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Créez un mot de passe fort",
+      "confirmPassword": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Retapez votre mot de passe",
+      "submit": "Créer mon compte",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter",
+      "terms": {
+        "text": "J'accepte les",
+        "link": "conditions d'utilisation"
+      },
+      "role": {
+        "label": "Je suis",
+        "candidate": "Candidat",
+        "candidateDesc": "Je cherche un emploi",
+        "recruiter": "Recruteur",
+        "recruiterDesc": "Je cherche des talents"
+      },
+      "gender": {
+        "label": "Genre",
+        "male": "Homme",
+        "female": "Femme"
+      }
+    },
+    "logout": {
+      "button": "Déconnexion",
+      "loading": "Déconnexion..."
+    },
+    "validation": {
+      "name": {
+        "required": "Le nom est requis",
+        "minLength": "Le nom doit contenir au moins 3 caractères",
+        "maxLength": "Le nom ne peut pas dépasser 50 caractères"
+      },
+      "email": {
+        "required": "L'email est requis",
+        "invalid": "Email invalide"
+      },
+      "password": {
+        "required": "Le mot de passe est requis",
+        "minLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "pattern": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
+        "requirements": "Le mot de passe doit contenir :",
+        "length": "Au moins 8 caractères",
+        "uppercase": "Une majuscule",
+        "lowercase": "Une minuscule",
+        "number": "Un chiffre",
+        "special": "Un caractère spécial"
+      },
+      "confirmPassword": {
+        "required": "Veuillez confirmer votre mot de passe",
+        "match": "Les mots de passe ne correspondent pas"
+      },
+      "role": {
+        "required": "Veuillez sélectionner un rôle"
+      },
+      "gender": {
+        "required": "Veuillez sélectionner votre genre"
+      },
+      "terms": {
+        "required": "Vous devez accepter les conditions d'utilisation"
+      }
+    },
+    "errors": {
+      "title": "Erreur",
+      "invalidCredentials": "Email ou mot de passe incorrect",
+      "emailExists": "Un compte avec cet email existe déjà",
+      "registrationFailed": "L'inscription a échoué. Veuillez réessayer."
+    },
+    "success": {
+      "login": "Connexion réussie !",
+      "register": "Compte créé avec succès !"
+    }
   }
 }

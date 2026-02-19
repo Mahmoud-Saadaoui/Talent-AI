@@ -12,16 +12,90 @@ datasource db {
   provider = "postgresql"
 }
 
-
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String
-  password String
+enum Role {
+  CANDIDATE
+  RECRUITER
+  ADMIN
 }
 
-model Profile { 
-  id    Int     @id @default(autoincrement()) 
-  bio String?
-  profession  String?
+enum JobType {
+  CDI
+  CDD
+  STAGE
+  FREELANCE
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+
+model User {
+  id                Int    @id @default(autoincrement())
+  name              String
+  email             String    @unique
+  password          String
+  role              Role    @default(CANDIDATE)
+  isAccountVerified Boolean @default(false)
+  gender           Gender?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  verificationTokens VerificationToken[]
+  // Profiles relations
+  candidateProfile  CandidateProfile?
+  recruiterProfile  RecruiterProfile?
+}
+
+model VerificationToken {
+  id        Int   @id @default(autoincrement()) 
+  userId    Int   @unique 
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RecruiterProfile {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  companyName        String
+  companyDescription String?
+  companySize        String?
+  website            String?
+  industry           String?
+  logo               String?
+  location           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CandidateProfile {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String?        // ex: Full-Stack Developer
+  bio         String?
+  location    String?
+  skills      String[]
+  softSkills  String[]
+  experiences Json           // [{title, company, startDate, endDate, description}]
+  education   Json           // [{degree, school, startDate, endDate}]
+  languages   Json           // [{language, level}]
+  cvUrl       String?        // lien PDF
+  embeddingId Int?           // pour IA matching futur
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

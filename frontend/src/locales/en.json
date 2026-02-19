@@ -10,5 +10,249 @@
     "arabic": "العربية",
     "french": "Français",
     "english": "English"
+  },
+  "home": {
+    "description": "Smart job platform that connects talents with the best opportunities.",
+    "getStarted": "Get Started",
+    "hero": {
+      "badge": "Powered by AI",
+      "title": "Find the Right",
+      "titleHighlight": "Talent with AI",
+      "subtitle": "The intelligent recruitment platform that connects top talent with perfect opportunities using artificial intelligence.",
+      "signIn": "Sign In"
+    },
+    "search": {
+      "jobButton": "Search Jobs",
+      "talentButton": "Find Talent",
+      "jobPlaceholder": "Job title, skill, company...",
+      "talentPlaceholder": "Skill, job title, field...",
+      "searchButton": "Search",
+      "quickFilters": ["Developer", "Designer", "Marketing", "Data", "Remote"]
+    },
+    "profile": {
+      "title": "What's your profile?",
+      "subtitle": "Choose your path to discover all the features tailored to your needs.",
+      "getStarted": "Get Started",
+      "candidate": {
+        "title": "I'm a Candidate",
+        "description": "Find your dream job and boost your candidacy with our AI tools.",
+        "benefits": [
+          "Smart job search",
+          "CV analysis & optimization",
+          "Personalized recommendations",
+          "Real-time job alerts"
+        ]
+      },
+      "recruiter": {
+        "title": "I'm a Recruiter",
+        "description": "Identify top talent and optimize your recruitment process.",
+        "benefits": [
+          "Smart AI matching",
+          "Automatic CV analysis",
+          "Analytics dashboard",
+          "Candidate management system"
+        ]
+      }
+    },
+    "features": {
+      "title": "Powerful Features",
+      "subtitle": "Discover how our AI transforms the recruitment experience for candidates and recruiters.",
+      "matching": {
+        "title": "Smart AI Matching",
+        "description": "Our algorithm analyzes skills, experience and personality to find the best matches."
+      },
+      "cvAnalysis": {
+        "title": "Automatic CV Analysis",
+        "description": "Instant extraction of key information and objective assessment of each application."
+      },
+      "recommendations": {
+        "title": "Personalized Recommendations",
+        "description": "Job or profile suggestions tailored to your unique criteria and preferences."
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Detailed statistics and insights to optimize your recruitment strategy."
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Three simple steps to find the ideal opportunity or talent.",
+      "step1": {
+        "title": "Upload CV / Job",
+        "description": "Upload your CV or describe the position to fill in just seconds."
+      },
+      "step2": {
+        "title": "AI Analysis",
+        "description": "Our AI analyzes and understands needs, skills and specific requirements."
+      },
+      "step3": {
+        "title": "Matching & Results",
+        "description": "Receive the best matches with detailed compatibility scores."
+      }
+    },
+    "stats": {
+      "candidates": "Active Candidates",
+      "companies": "Companies",
+      "satisfaction": "Satisfaction Rate",
+      "avgTime": "Avg. Matching Time"
+    },
+    "testimonials": {
+      "title": "What Our Users Say",
+      "subtitle": "Thousands of candidates and recruiters trust us.",
+      "item1": {
+        "quote": "Thanks to TalentAI, I found the perfect job in just 2 weeks. The recommendations were very relevant!",
+        "author": "Sophie Martin",
+        "role": "Full-stack Developer"
+      },
+      "item2": {
+        "quote": "The AI matching system saved us 50% time in our recruitment process. Really impressive.",
+        "author": "Thomas Dubois",
+        "role": "HR Manager, TechCorp"
+      },
+      "item3": {
+        "quote": "The CV analysis helped me understand my strengths and improve my application. I'm hired!",
+        "author": "Lea Bernard",
+        "role": "UX Designer"
+      }
+    },
+    "companies": {
+      "label": "Trusted by",
+      "list": ["Google", "Microsoft", "Amazon", "Apple", "Meta"]
+    },
+    "cta": {
+      "title": "Ready to Transform Your Recruitment?",
+      "subtitle": "Join thousands of candidates and recruiters already using TalentAI.",
+      "primaryButton": "Get Started Free",
+      "secondaryButton": "View Demo"
+    },
+    "footer": {
+      "description": "The intelligent recruitment platform that connects talents with the best opportunities.",
+      "forCandidates": "Candidates",
+      "forRecruiters": "Recruiters",
+      "company": "Company",
+      "allRightsReserved": "All rights reserved.",
+      "location": "Paris, France",
+      "links": {
+        "searchJobs": "Search Jobs",
+        "cvBuilder": "CV Builder",
+        "recommendations": "Recommendations",
+        "careerAdvice": "Career Advice",
+        "postJob": "Post a Job",
+        "searchTalents": "Search Talents",
+        "pricing": "Pricing",
+        "enterprise": "Enterprise",
+        "about": "About",
+        "contact": "Contact",
+        "privacy": "Privacy",
+        "terms": "Terms of Service"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home",
+    "goBack": "Go Back",
+    "helpfulLinks": "Helpful Links",
+    "links": {
+      "home": "Home",
+      "login": "Sign In",
+      "register": "Sign Up"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Sign in to your TalentIA account",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Create an account"
+    },
+    "register": {
+      "title": "Create an Account",
+      "subtitle": "Join TalentIA today",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Create a strong password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign In",
+      "terms": {
+        "text": "I accept the",
+        "link": "terms of service"
+      },
+      "role": {
+        "label": "I am a",
+        "candidate": "Candidate",
+        "candidateDesc": "Looking for a job",
+        "recruiter": "Recruiter",
+        "recruiterDesc": "Looking for talents"
+      },
+      "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "female": "Female"
+      }
+    },
+    "logout": {
+      "button": "Logout",
+      "loading": "Logging out..."
+    },
+    "validation": {
+      "name": {
+        "required": "Name is required",
+        "minLength": "Name must be at least 3 characters long",
+        "maxLength": "Name must not exceed 50 characters"
+      },
+      "email": {
+        "required": "Email is required",
+        "invalid": "Invalid email address"
+      },
+      "password": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters long",
+        "pattern": "Password must include uppercase, lowercase, number and special character",
+        "requirements": "Password must contain:",
+        "length": "At least 8 characters",
+        "uppercase": "An uppercase letter",
+        "lowercase": "A lowercase letter",
+        "number": "A number",
+        "special": "A special character"
+      },
+      "confirmPassword": {
+        "required": "Please confirm your password",
+        "match": "Passwords do not match"
+      },
+      "role": {
+        "required": "Please select a role"
+      },
+      "gender": {
+        "required": "Please select your gender"
+      },
+      "terms": {
+        "required": "You must accept the terms of service"
+      }
+    },
+    "errors": {
+      "title": "Error",
+      "invalidCredentials": "Invalid email or password",
+      "emailExists": "An account with this email already exists",
+      "registrationFailed": "Registration failed. Please try again."
+    },
+    "success": {
+      "login": "Login successful!",
+      "register": "Account created successfully!"
+    }
   }
 }
