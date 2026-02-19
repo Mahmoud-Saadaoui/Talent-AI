@@ -1,62 +1,91 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useCallback, type FormEvent } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import swal from 'sweetalert';
+
 import AuthLayout from '../components/AuthLayout';
 import AuthPageHeader from '../components/AuthPageHeader';
 import AuthFormCard from '../components/AuthFormCard';
 import AuthInput from '../components/AuthInput';
 import AuthSubmitButton from '../components/AuthSubmitButton';
 import AuthFooterLink from '../components/AuthFooterLink';
-import { toast } from 'react-toastify';
+import GenderSelector from '../components/GenderSelector';
+import RoleSelector from '../components/RoleSelector';
+import PasswordRequirements from '../components/PasswordRequirements';
 import { useRegister } from '../hooks/useRegister';
-import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import type { RegisterData } from '../types';
 
 const RegisterPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+
+  // Form state
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    name: '',
+    gender: null as 'MALE' | 'FEMALE' | null,
+    role: null as 'CANDIDATE' | 'RECRUITER' | null,
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [gender, setGender] = useState<'MALE' | 'FEMALE' | null>(null);
-  const [role, setRole] = useState<'CANDIDATE' | 'RECRUITER' | null>(null);
 
   const { mutate, isPending } = useRegister();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Validation
-    if(email.trim() === "" || password.trim() === "" || name.trim() === "") {
-      return toast.error("Name, Email and Password are required")
+  // Validation helper
+  const validateForm = (): boolean => {
+    if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
+      toast.error('Name, Email and Password are required');
+      return false;
     }
-    if(!gender) {
-      return toast.error("Please select a gender")
+    if (!form.gender) {
+      toast.error('Please select a gender');
+      return false;
     }
-    if(!role) {
-      return toast.error("Please select a role")
+    if (!form.role) {
+      toast.error('Please select a role');
+      return false;
     }
-
-     mutate(
-      { email, password, name, gender, role },
-      {
-        onSuccess: () => {
-          swal({
-            title:
-              "We've sent a verification link to your email address. Please Check it",
-            icon: "success",
-          }).then((isOk) => {
-            if (isOk) {
-              navigate("/login");
-            }
-          });
-        },
-          onError: (error) => {
-          toast.error((error as any)?.response?.data?.message || "Failed Register");
-        },
-      }
-    );
+    return true;
   };
+
+  // Submit handler
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    mutate(form as RegisterData, {
+      onSuccess: () => {
+        swal({
+          title: "We've sent a verification link to your email address. Please Check it",
+          icon: 'success',
+        }).then((isOk) => isOk && navigate('/login'));
+      },
+      onError: (error) => {
+        const message = axios.isAxiosError(error)
+          ? error.response?.data?.message || 'Failed Register'
+          : 'Failed Register';
+        toast.error(message);
+      },
+    });
+  };
+
+  // Input change handler
+  const handleInputChange = useCallback(
+    (field: keyof Pick<typeof form, 'email' | 'password' | 'name'>) =>
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      },
+    []
+  );
+
+  // Password toggle
+  const togglePassword = useCallback(() => setShowPassword((prev) => !prev), []);
+
+  // Password visibility icon
+  const PasswordIcon = showPassword ? EyeOff : Eye;
 
   return (
     <AuthLayout maxWidth="lg">
@@ -68,93 +97,41 @@ const RegisterPage = () => {
 
       <AuthFormCard>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          {/* Name */}
+          {/* Basic Info */}
           <AuthInput
             type="text"
             label={t('auth.register.name')}
             placeholder={t('auth.register.namePlaceholder')}
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={form.name}
+            onChange={handleInputChange('name')}
           />
-
-          {/* Email */}
           <AuthInput
             type="email"
             label={t('auth.register.email')}
             placeholder={t('auth.register.emailPlaceholder')}
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={handleInputChange('email')}
           />
 
           {/* Gender Selection */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-              {t('auth.register.gender.label')}
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setGender('MALE')}
-                className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all ${
-                  gender === 'MALE'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30'
-                }`}
-              >
-                <span className="text-2xl">👨</span>
-                <span className="font-medium text-gray-700 dark:text-gray-300">{t('auth.register.gender.male')}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setGender('FEMALE')}
-                className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all ${
-                  gender === 'FEMALE'
-                    ? 'border-pink-500 bg-pink-50 dark:bg-pink-900/30'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-pink-500 dark:hover:border-pink-500 hover:bg-pink-50 dark:hover:bg-pink-900/30'
-                }`}
-              >
-                <span className="text-2xl">👩</span>
-                <span className="font-medium text-gray-700 dark:text-gray-300">{t('auth.register.gender.female')}</span>
-              </button>
-            </div>
-          </div>
+          <GenderSelector
+            value={form.gender}
+            onChange={(gender) => setForm((prev) => ({ ...prev, gender }))}
+            maleLabel={t('auth.register.gender.male')}
+            femaleLabel={t('auth.register.gender.female')}
+          />
 
           {/* Role Selection */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-              {t('auth.register.role.label')}
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setRole('CANDIDATE')}
-                className={`flex flex-col items-center gap-2 px-4 py-4 rounded-xl border-2 transition-all ${
-                  role === 'CANDIDATE'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30'
-                }`}
-              >
-                <span className="text-3xl">👤</span>
-                <span className="font-medium text-gray-900 dark:text-gray-100">{t('auth.register.role.candidate')}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{t('auth.register.role.candidateDesc')}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setRole('RECRUITER')}
-                className={`flex flex-col items-center gap-2 px-4 py-4 rounded-xl border-2 transition-all ${
-                  role === 'RECRUITER'
-                    ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-purple-500 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/30'
-                }`}
-              >
-                <span className="text-3xl">🏢</span>
-                <span className="font-medium text-gray-900 dark:text-gray-100">{t('auth.register.role.recruiter')}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{t('auth.register.role.recruiterDesc')}</span>
-              </button>
-            </div>
-          </div>
+          <RoleSelector
+            value={form.role}
+            onChange={(role) => setForm((prev) => ({ ...prev, role }))}
+            candidateLabel={t('auth.register.role.candidate')}
+            candidateDesc={t('auth.register.role.candidateDesc')}
+            recruiterLabel={t('auth.register.role.recruiter')}
+            recruiterDesc={t('auth.register.role.recruiterDesc')}
+          />
 
           {/* Password */}
           <div>
@@ -165,45 +142,33 @@ const RegisterPage = () => {
               rightElement={
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={togglePassword}
                   className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  <PasswordIcon className="w-5 h-5" />
                 </button>
               }
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={form.password}
+              onChange={handleInputChange('password')}
             />
-            {/* Password Requirements */}
-            <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-              <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
-                {t('auth.validation.password.requirements')}
-              </p>
-              <ul className="space-y-1">
-                <li className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                  <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                  {t('auth.validation.password.length')}
-                </li>
-                <li className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                  <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                  {t('auth.validation.password.uppercase')} / {t('auth.validation.password.lowercase')}
-                </li>
-                <li className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                  <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                  {t('auth.validation.password.number')} / {t('auth.validation.password.special')}
-                </li>
-              </ul>
-            </div>
+            <PasswordRequirements
+              password={form.password}
+              requirementsLabel={t('auth.validation.password.requirements')}
+              lengthLabel={t('auth.validation.password.length')}
+              uppercaseLabel={t('auth.validation.password.uppercase')}
+              lowercaseLabel={t('auth.validation.password.lowercase')}
+              numberLabel={t('auth.validation.password.number')}
+              specialLabel={t('auth.validation.password.special')}
+            />
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <AuthSubmitButton isLoading={isPending}>
             {t('auth.register.submit')}
           </AuthSubmitButton>
         </form>
 
-        {/* Login Link */}
         <AuthFooterLink
           text={t('auth.register.hasAccount')}
           linkText={t('auth.register.loginLink')}
