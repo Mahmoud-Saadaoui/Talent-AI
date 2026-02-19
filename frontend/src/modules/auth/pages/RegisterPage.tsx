@@ -22,7 +22,7 @@ const RegisterPage = () => {
   const [gender, setGender] = useState<'MALE' | 'FEMALE' | null>(null);
   const [role, setRole] = useState<'CANDIDATE' | 'RECRUITER' | null>(null);
 
-  const { mutate, isPending, error, isError } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,15 +51,15 @@ const RegisterPage = () => {
             }
           });
         },
+          onError: (error) => {
+          toast.error((error as any)?.response?.data?.message || "Failed Register");
+        },
       }
     );
   };
 
   return (
     <AuthLayout maxWidth="lg">
-      {
-          isError && toast.error((error as any)?.response?.data?.message || "Failed Register")
-      }
       <AuthPageHeader
         type="register"
         title={t('auth.register.title')}

@@ -18,7 +18,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const {mutate, isPending, error, isError} = useLogin()
+  const { mutate, isPending } = useLogin()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +30,9 @@ const LoginPage = () => {
           console.log(data);
           navigate('/')
         },
+        onError: (error) => {
+          toast.error((error as any)?.response?.data?.message || "Failed Login")  
+        }
       },
     );
     setEmail("");
@@ -38,9 +41,6 @@ const LoginPage = () => {
 
   return (
     <AuthLayout>
-      {
-        isError && toast.error((error as any)?.response?.data?.message || "Failed Login")
-      }
       <AuthPageHeader
         type="login"
         title={t('auth.login.title')}

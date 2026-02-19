@@ -1,15 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { RegisterData } from "../types";
-
-const url = "http://localhost:3000/api/v1/auth/register"
+import { api } from "../../../shared/config";
 
 const registerApi = async (data: RegisterData) => {
   try {
-    const res = await axios.post(url, data)
+    const res = await api.post('/auth/register', data)
     return res.data
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
