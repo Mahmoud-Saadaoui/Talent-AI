@@ -16,7 +16,7 @@ import GenderSelector from '../components/GenderSelector';
 import RoleSelector from '../components/RoleSelector';
 import PasswordRequirements from '../components/PasswordRequirements';
 import { useRegister } from '../hooks/useRegister';
-import type { RegisterData } from '../types';
+import { useRegisterValidation } from '../hooks/useRegisterValidation';
 
 const RegisterPage = () => {
   const { t } = useTranslation();
@@ -33,30 +33,24 @@ const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate, isPending } = useRegister();
-
-  // Validation helper
-  const validateForm = (): boolean => {
-    if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
-      toast.error('Name, Email and Password are required');
-      return false;
-    }
-    if (!form.gender) {
-      toast.error('Please select a gender');
-      return false;
-    }
-    if (!form.role) {
-      toast.error('Please select a role');
-      return false;
-    }
-    return true;
-  };
+  const { validateAndPrepareData } = useRegisterValidation();
 
   // Submit handler
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
 
-    mutate(form as RegisterData, {
+    // Validate form using custom hook
+    const { isValid, data } = validateAndPrepareData(
+      form.name,
+      form.email,
+      form.password,
+      form.gender,
+      form.role
+    );
+
+    if (!isValid || !data) return;
+
+    mutate(data, {
       onSuccess: () => {
         swal({
           title: "We've sent a verification link to your email address. Please Check it",
