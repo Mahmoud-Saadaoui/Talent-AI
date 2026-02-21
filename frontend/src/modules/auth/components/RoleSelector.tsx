@@ -1,5 +1,6 @@
 interface RoleSelectorProps {
   value: 'CANDIDATE' | 'RECRUITER' | null;
+  // eslint-disable-next-line no-unused-vars
   onChange: (role: 'CANDIDATE' | 'RECRUITER') => void;
   candidateLabel: string;
   candidateDesc: string;

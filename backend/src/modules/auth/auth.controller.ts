@@ -97,12 +97,10 @@ export const login = async (req: Request, res: Response) => {
         email: user.email,
       });
       res.status(200).json({
-        message: "Welcome back",
-        data: {
           id: user.id,
           name: user.name,
+          role: user.role,
           token,
-        },
       });
       return;
     } else {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Search, Briefcase, Users, Sparkles, ArrowRight } from 'lucide-react';
@@ -8,13 +8,13 @@ const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState<'job' | 'talent'>('job');
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery, 'type:', searchType);
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-[90vh] flex items-center">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl" />
@@ -32,7 +32,7 @@ const HeroSection = () => {
           {/* Title */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
             {t('home.hero.title')}
-            <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {t('home.hero.titleHighlight')}
             </span>
           </h1>
@@ -85,7 +85,7 @@ const HeroSection = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white font-semibold rounded-r-2xl transition-all flex items-center gap-2"
+                  className="px-8 py-4 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white font-semibold rounded-r-2xl transition-all flex items-center gap-2"
                 >
                   <Search className="w-5 h-5" />
                   {t('home.search.searchButton')}

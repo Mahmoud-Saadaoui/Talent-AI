@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import AuthLayout from '../components/AuthLayout';
@@ -10,6 +10,7 @@ import AuthSubmitButton from '../components/AuthSubmitButton';
 import AuthFooterLink from '../components/AuthFooterLink';
 import { useLogin } from '../hooks/useLogin';
 import { toast } from 'react-toastify';
+import { useAppContext } from '../../../shared/context';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -19,15 +20,16 @@ const LoginPage = () => {
   const [password, setPassword] = useState("")
 
   const { mutate, isPending } = useLogin()
+  const { setCredentials } = useAppContext();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     mutate(
       { email, password },
       {
         onSuccess: (data) => {
-          console.log(data);
+          setCredentials(data);
           navigate('/')
         },
         onError: (error) => {

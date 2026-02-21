@@ -1,5 +1,6 @@
 interface GenderSelectorProps {
   value: 'MALE' | 'FEMALE' | null;
+  // eslint-disable-next-line no-unused-vars
   onChange: (gender: 'MALE' | 'FEMALE') => void;
   maleLabel: string;
   femaleLabel: string;

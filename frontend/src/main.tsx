@@ -4,6 +4,7 @@ import './app/index.css'
 import './i18n/config'
 import Router from './app/routes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AppProvider } from './shared/context';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,9 +18,9 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* <AppProvider> */}
+      <AppProvider>
         <Router />
-      {/* </AppProvider> */}
+      </AppProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 )

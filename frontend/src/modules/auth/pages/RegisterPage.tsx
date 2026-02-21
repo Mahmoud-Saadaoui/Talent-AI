@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { useState, useCallback, type FormEvent } from 'react';
+import { useState, useCallback, FormEvent, ChangeEvent } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
-
 import AuthLayout from '../components/AuthLayout';
 import AuthPageHeader from '../components/AuthPageHeader';
 import AuthFormCard from '../components/AuthFormCard';
@@ -69,7 +68,7 @@ const RegisterPage = () => {
   // Input change handler
   const handleInputChange = useCallback(
     (field: keyof Pick<typeof form, 'email' | 'password' | 'name'>) =>
-      (e: React.ChangeEvent<HTMLInputElement>) => {
+      (e: ChangeEvent<HTMLInputElement>) => {
         setForm((prev) => ({ ...prev, [field]: e.target.value }));
       },
     []
