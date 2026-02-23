@@ -253,6 +253,16 @@
     "success": {
       "login": "Connexion réussie !",
       "register": "Compte créé avec succès !"
+    },
+    "verifyEmail": {
+      "loading": "Vérification de votre email...",
+      "success": "Email vérifié avec succès !",
+      "welcome": "Bienvenue",
+      "error": "La vérification a échoué",
+      "invalidLink": "Lien de vérification invalide",
+      "toLogin": "Se connecter",
+      "toRegister": "Créer un compte",
+      "backToLogin": "Retour à la connexion"
     }
   }
 }

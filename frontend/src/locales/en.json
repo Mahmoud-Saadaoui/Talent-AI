@@ -253,6 +253,16 @@
     "success": {
       "login": "Login successful!",
       "register": "Account created successfully!"
+    },
+    "verifyEmail": {
+      "loading": "Verifying your email...",
+      "success": "Email verified successfully!",
+      "welcome": "Welcome",
+      "error": "Verification failed",
+      "invalidLink": "Invalid verification link",
+      "toLogin": "Sign In",
+      "toRegister": "Create Account",
+      "backToLogin": "Back to Login"
     }
   }
 }

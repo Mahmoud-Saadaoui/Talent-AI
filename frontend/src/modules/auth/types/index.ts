@@ -21,7 +21,7 @@ export interface AuthLayoutProps {
 }
 
 export interface AuthPageHeaderProps {
-  type: 'login' | 'register';
+  type: 'login' | 'register' | 'verify';
   title: string;
   subtitle: string;
 }

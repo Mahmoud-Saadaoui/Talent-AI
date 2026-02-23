@@ -4,6 +4,9 @@ import { LoginUser, RegisterUser, UserInfo } from "./auth.types";
 import { loginSchema, registerSchema } from "./auth.validation";
 import { prisma } from "../../config/db";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { getVerificationEmailTemplate } from "./templates";
+import { sendEmail } from "./nodemailer";
 
 const generateToken = (res: Response, userInfo: UserInfo): string => {
   const secret = process.env.JWT_SECRET;
@@ -39,15 +42,15 @@ export const register = async (req: Request, res: Response) => {
     }
 
     // Check if user exist
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (user) {
+    const userExist = await prisma.user.findUnique({ where: { email } });
+    if (userExist) {
       res.status(400).json({ message: "User Already Exist" });
       return;
     }
 
     // Hash password
     const hashPassword = await bcrypt.hash(password, 15);
-    const newUser = await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         name,
         email,
@@ -61,6 +64,22 @@ export const register = async (req: Request, res: Response) => {
         email: true,
       },
     });
+    
+    // Generate an email verification token
+    const rawToken = crypto.randomBytes(32).toString("hex");
+    const vtoken = await prisma.verificationToken.create({
+      data: {
+        userId: user.id,
+        token: rawToken
+      }
+    })
+
+    // Create the verification link
+    const clientUrl = process.env.CLIENT_URL
+    const link = `${clientUrl}/auth/${user.id}/verify/${vtoken.token}`
+    // Prepare the email content and send it
+    const htmlTemplate = getVerificationEmailTemplate(link);
+    await sendEmail(user.email, "Verify Your Email Address", htmlTemplate);
 
     // Respond with success message
     res.status(201).json({
@@ -75,6 +94,12 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ *  @method  POST
+ *  @route   /api/v1/auth/login
+ *  @desc    Login User
+ *  @access  public
+*/
 export const login = async (req: Request, res: Response) => {
   try {
     const { password, email } = req.body as LoginUser;
@@ -117,3 +142,80 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 };
+
+/**
+ *  @method  POST
+ *  @route   /api/v1/auth/:userId/verify/:token
+ *  @desc    Create New User
+ *  @access  public
+*/
+export const verifyAccount = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, token } = req.params
+    // Validate params
+    if (!userId || !token || Array.isArray(token)) {
+      res.status(400).json({ message: "Invalid verification link." });
+      return;
+    }
+
+    const numericUserId = Number(userId);
+    if (isNaN(numericUserId)) {
+      res.status(400).json({ message: "Invalid user ID." });
+      return;
+    }
+    // Check if user exists
+    const user = await prisma.user.findUnique({
+      where: { id: numericUserId }
+    });
+    if (!user) {
+      res.status(400).json({ message: "Invalid verification link." })
+      return 
+    }
+    if (user?.isAccountVerified) {
+      res.status(200).json({
+        message: "Your account is already verified.",
+        user,
+      });
+      return 
+    }
+    // Check if token exists for this user
+    const verificationToken = await prisma.verificationToken.findFirst({
+      where: { 
+        userId: user?.id, 
+        token 
+      },
+    });
+    if (!verificationToken) {
+      res.status(400).json({ message: "Invalid or expired verification link." })
+      return 
+    }
+    // Mark account as verified
+    const updatedUser = await prisma.user.update({
+      where: { id: numericUserId },
+      data: { isAccountVerified: true },
+      select: { 
+        id: true, 
+        name: true, 
+        email: true,
+        role: true,
+      }
+    });
+    // Delete used token
+    await prisma.verificationToken.delete({
+      where: { id: verificationToken?.id },
+    });
+    // Respond with success
+    res
+      .status(200)
+      .json({
+        message: "Your account has been successfully verified.",
+        user: updatedUser,
+      });
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : "Unknown error";
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: errorMessage,
+    });
+  }
+}
